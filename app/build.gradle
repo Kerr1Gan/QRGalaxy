@@ -113,6 +113,7 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport:2.8.6.0'
     implementation "com.squareup.okhttp3:okhttp:4.0.1"
     implementation "com.github.bumptech.glide:glide:4.0.0"
+    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.2.1'
     implementation project(':common-components')
     implementation project(':mvp-dagger')
     implementation project(':installer')
