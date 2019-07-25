@@ -36,6 +36,7 @@ import com.common.componentes.activity.ImmersiveFragmentActivity;
 import com.common.utils.activity.ActivityUtil;
 import com.galaxy.android.apklist.ApkListFragment;
 import com.galaxy.android.fragment.AppListFragment;
+import com.galaxy.android.qr.QRActivity;
 import com.galaxy.asia.R;
 import com.galaxy.asia.bean.ApkInfo;
 
@@ -78,6 +79,8 @@ public class MainActivity extends ImmersiveFragmentActivity implements MainContr
         bindView();
         inflaterMenu();
         bindListener();
+        Intent intent = new Intent(this, QRActivity.class);
+        startActivity(intent);
     }
 
     @Override
