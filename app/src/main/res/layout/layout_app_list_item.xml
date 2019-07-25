@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_app_logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:background="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@id/iv_app_logo"
+        app:layout_constraintRight_toLeftOf="@id/btn_install"
+        tools:text="youtube" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textSize="13dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="Finance" />
+
+    <Button
+        android:id="@+id/btn_install"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
+        android:background="@drawable/selector_btn_install"
+        android:text="install"
+        android:textAllCaps="false"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>

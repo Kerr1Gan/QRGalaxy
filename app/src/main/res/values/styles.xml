@@ -1,0 +1,38 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="ImageStatusBarStyle" parent="CCImageStatusBarStyle">
+        <item name="android:colorAccent" tools:targetApi="lollipop">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--引入SearchView的自定义样式-->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="AppPreferenceTheme" parent="CCAppPreferenceTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="drawerArrowStyle">@style/CCAppTheme.DrawerArrowToggle</item>
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="actionBarTheme">@style/CCWhiteToolbar</item>
+        <item name="toolbarStyle">@style/CCNoSpaceNavigationToolbar</item>
+
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+    </style>
+
+</resources>

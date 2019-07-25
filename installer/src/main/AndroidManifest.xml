@@ -1,0 +1,69 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.flybd.installer">
+
+    <application>
+        <activity
+            android:name="com.flybd.installer.InstallActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparent" />
+
+        <activity
+            android:name=".RequestInstallActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparent" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Google Analytics -->
+        <receiver
+            android:name=".InstallReferrerReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <!--<receiver-->
+        <!--android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"-->
+        <!--android:enabled="true"-->
+        <!--android:exported="true">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.android.vending.INSTALL_REFERRER" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name=".InstallService"
+            android:process=":notification" />
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+</manifest>
