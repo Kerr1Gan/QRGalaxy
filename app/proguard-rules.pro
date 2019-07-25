@@ -85,6 +85,8 @@
 -keep class okhttp3.internal.**{*;}
 -dontwarn okio.**
 
+-keep class cn.bingoogolapple.**{*;}
+-dontwarn cn.bingoogolapple.**
 # Admob
 #-keep public class com.google.**{*;}
 #-dontwarn com.google.**
