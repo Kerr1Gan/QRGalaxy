@@ -73,7 +73,7 @@ android {
         release {
             keyAlias "${signing_keyAlias}"
             keyPassword "${signging_certificatePassword}"
-            storeFile file("../keystore/${signing_certificate}")
+            storeFile file("../${signing_certificate}")
             storePassword "${signging_storePassword}"
 
             v1SigningEnabled true
