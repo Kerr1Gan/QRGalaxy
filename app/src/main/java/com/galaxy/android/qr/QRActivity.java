@@ -1,8 +1,11 @@
 package com.galaxy.android.qr;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
@@ -16,19 +19,28 @@ import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
 public class QRActivity extends ImmersiveFragmentActivity {
 
-    QRCodeView mQRCodeView;
+    QRCodeView qrCodeView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
-        mQRCodeView = (ZXingView) findViewById(R.id.zbarview);
-        mQRCodeView.setDelegate(new QRCodeView.Delegate() {
+
+
+        qrCodeView = (ZXingView) findViewById(R.id.zbarview);
+        qrCodeView.setDelegate(new QRCodeView.Delegate() {
             @Override
             public void onScanQRCodeSuccess(String result) {
                 Toast.makeText(QRActivity.this, result, Toast.LENGTH_SHORT).show();
-                mQRCodeView.startSpot();
+                AlertDialog.Builder builder = new AlertDialog.Builder(QRActivity.this);
+                builder.setTitle("Result")
+                        .setMessage(result)
+                        .setCancelable(false)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            dialog.dismiss();
+                            qrCodeView.startSpot();
+                        });
             }
 
             @Override
@@ -40,24 +52,47 @@ public class QRActivity extends ImmersiveFragmentActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean hasPermission = true;
+        for (int grant : grantResults) {
+            if (grant == PackageManager.PERMISSION_DENIED) {
+                hasPermission = false;
+            }
+        }
+
+        if (hasPermission) {
+            qrCodeView.startCamera();//打开相机
+            qrCodeView.showScanRect();//显示扫描框
+            qrCodeView.startSpot();//开始识别二维码
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
+        }
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-        mQRCodeView.startCamera();//打开相机
-        mQRCodeView.showScanRect();//显示扫描框
-        mQRCodeView.startSpot();//开始识别二维码
-        //mQRCodeView.openFlashlight();//开灯
-        //mQRCodeView.closeFlashlight();//关灯
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
+        } else {
+            qrCodeView.startCamera();//打开相机
+            qrCodeView.showScanRect();//显示扫描框
+            qrCodeView.startSpot();//开始识别二维码
+        }
+        //qrCodeView.openFlashlight();//开灯
+        //qrCodeView.closeFlashlight();//关灯
     }
 
     @Override
     protected void onStop() {
-        mQRCodeView.stopCamera();
+        qrCodeView.stopCamera();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        mQRCodeView.onDestroy();
+        qrCodeView.onDestroy();
         super.onDestroy();
     }
 
